@@ -4,6 +4,11 @@
 \ifdefined\pdfpxdimen
    \let\sphinxpxdimen\pdfpxdimen\else\newdimen\sphinxpxdimen
 \fi \sphinxpxdimen=.75bp\relax
+\ifdefined\pdfimageresolution
+    \pdfimageresolution= \numexpr \dimexpr1in\relax/\sphinxpxdimen\relax
+\fi
+%% let collapsible pdf bookmarks panel have high depth per default
+\PassOptionsToPackage{bookmarksdepth=5}{hyperref}
 
 \PassOptionsToPackage{warn}{textcomp}
 \usepackage[utf8]{inputenc}
@@ -28,34 +33,16 @@
 
 
 
-\usepackage{times}
-\expandafter\ifx\csname T@LGR\endcsname\relax
-\else
-% LGR was declared as font encoding
-  \substitutefont{LGR}{\rmdefault}{cmr}
-  \substitutefont{LGR}{\sfdefault}{cmss}
-  \substitutefont{LGR}{\ttdefault}{cmtt}
-\fi
-\expandafter\ifx\csname T@X2\endcsname\relax
-  \expandafter\ifx\csname T@T2A\endcsname\relax
-  \else
-  % T2A was declared as font encoding
-    \substitutefont{T2A}{\rmdefault}{cmr}
-    \substitutefont{T2A}{\sfdefault}{cmss}
-    \substitutefont{T2A}{\ttdefault}{cmtt}
-  \fi
-\else
-% X2 was declared as font encoding
-  \substitutefont{X2}{\rmdefault}{cmr}
-  \substitutefont{X2}{\sfdefault}{cmss}
-  \substitutefont{X2}{\ttdefault}{cmtt}
-\fi
+\usepackage{tgtermes}
+\usepackage{tgheros}
+\renewcommand{\ttdefault}{txtt}
+
 
 
 \usepackage[Bjarne]{fncychap}
 \usepackage{sphinx}
 
-\fvset{fontsize=\small}
+\fvset{fontsize=auto}
 \usepackage{geometry}
 
 
@@ -74,9 +61,9 @@
 
 
 \title{treeoclock}
-\date{Jun 22, 2021}
-\release{0.0.1}
-\author{Lars Berling, Lena Collienne, Jordan Kettles}
+\date{Aug 15, 2022}
+\release{1.0.0}
+\author{Lars Berling}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{Release}
 \makeindex
@@ -98,47 +85,41 @@
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{trees:id1}}{\hyperref[\detokenize{trees:working-with-time-trees}]{\sphinxcrossref{Working with time trees}}}
+\phantomsection\label{\detokenize{trees:id3}}{\hyperref[\detokenize{trees:working-with-time-trees}]{\sphinxcrossref{Working with time trees}}}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{trees:id2}}{\hyperref[\detokenize{trees:the-timetree-class}]{\sphinxcrossref{The TimeTree class}}}
+\phantomsection\label{\detokenize{trees:id4}}{\hyperref[\detokenize{trees:the-timetree-class}]{\sphinxcrossref{The TimeTree class}}}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{trees:id3}}{\hyperref[\detokenize{trees:timetree-attributes}]{\sphinxcrossref{TimeTree attributes}}}
+\phantomsection\label{\detokenize{trees:id5}}{\hyperref[\detokenize{trees:timetree-attributes}]{\sphinxcrossref{TimeTree attributes}}}
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{trees:id4}}{\hyperref[\detokenize{trees:ete3-functionalities}]{\sphinxcrossref{ete3 functionalities}}}
+\phantomsection\label{\detokenize{trees:id6}}{\hyperref[\detokenize{trees:ete3-functionalities}]{\sphinxcrossref{ete3 functionalities}}}
 
 \end{itemize}
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{trees:id5}}{\hyperref[\detokenize{trees:the-timetreeset-class}]{\sphinxcrossref{The TimeTreeSet class}}}
+\phantomsection\label{\detokenize{trees:id7}}{\hyperref[\detokenize{trees:the-timetreeset-class}]{\sphinxcrossref{The TimeTreeSet class}}}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{trees:id6}}{\hyperref[\detokenize{trees:reading-trees}]{\sphinxcrossref{Reading Trees}}}
-
-\item {} 
-\sphinxAtStartPar
-\phantomsection\label{\detokenize{trees:id7}}{\hyperref[\detokenize{trees:writing-trees}]{\sphinxcrossref{Writing trees}}}
+\phantomsection\label{\detokenize{trees:id8}}{\hyperref[\detokenize{trees:reading-trees}]{\sphinxcrossref{Reading Trees}}}
 
 \end{itemize}
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{trees:id8}}{\hyperref[\detokenize{trees:random-trees}]{\sphinxcrossref{Random trees}}}
-
+\phantomsection\label{\detokenize{trees:id9}}{\hyperref[\detokenize{trees:general-functions}]{\sphinxcrossref{General Functions}}}
+\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{trees:id9}}{\hyperref[\detokenize{trees:combining-multiple-timetreesets}]{\sphinxcrossref{Combining multiple TimeTreeSets}}}
+\phantomsection\label{\detokenize{trees:id10}}{\hyperref[\detokenize{trees:working-with-findpath-path-and-c-memory}]{\sphinxcrossref{Working with findpath\_path and c memory}}}
 
-\item {} 
-\sphinxAtStartPar
-\phantomsection\label{\detokenize{trees:id10}}{\hyperref[\detokenize{trees:general-functions}]{\sphinxcrossref{General Functions}}}
+\end{itemize}
 
 \item {} 
 \sphinxAtStartPar
@@ -171,8 +152,8 @@
 \section{The TimeTree class}
 \label{\detokenize{trees:the-timetree-class}}
 \sphinxAtStartPar
-A \sphinxcode{\sphinxupquote{TimeTree}} can be initialized with a given newick string using the \sphinxhref{http://etetoolkit.org/docs/latest/tutorial/tutorial\_trees.html\#trees}{ete3.Tree} constructor and its \sphinxhref{http://etetoolkit.org/docs/latest/tutorial/tutorial\_trees.html\#reading-and-writing-newick-trees}{format options}.
-Additionally, a \sphinxcode{\sphinxupquote{TREE}} object ({\hyperref[\detokenize{trees:c-classes}]{\sphinxcrossref{\DUrole{std,std-ref}{Classes for the c library}}}}) is generated and saved in the \sphinxcode{\sphinxupquote{TimeTree}} and used for efficient distance computations.
+A \sphinxcode{\sphinxupquote{TimeTree}} can be initialized with a given newick string using the  constructor and its format options.
+Additionally, a \sphinxcode{\sphinxupquote{TREE}} object ({\hyperref[\detokenize{trees:c-classes}]{\sphinxcrossref{\DUrole{std,std-ref}{Classes for the c library}}}}) is generated and saved in the \sphinxcode{\sphinxupquote{TimeTree}} and used for efficient RNNI distance computations.
 
 
 \subsection{TimeTree attributes}
@@ -222,7 +203,7 @@ returns the findpath distance to another \sphinxcode{\sphinxupquote{TimeTree}} \
 \sphinxcode{\sphinxupquote{TimeTree.fp\_path(t)}}
 &
 \sphinxAtStartPar
-returns a \sphinxstyleemphasis{list} of \sphinxcode{\sphinxupquote{TREE}} objects
+returns a \sphinxcode{\sphinxupquote{TREE\_LIST}} object, allocated memory needs to be freed!
 \\
 \hline
 \sphinxAtStartPar
@@ -236,7 +217,7 @@ returns the \sphinxstyleemphasis{write()} function of the \sphinxcode{\sphinxupq
 \sphinxcode{\sphinxupquote{TimeTree.copy()}}
 &
 \sphinxAtStartPar
-returns a deep copy of the current \sphinxcode{\sphinxupquote{TimeTree}} (specifically used to generate a new \sphinxcode{\sphinxupquote{TREE}} object)
+returns a deep copy of the current \sphinxcode{\sphinxupquote{TimeTree}}
 \\
 \hline
 \sphinxAtStartPar
@@ -260,6 +241,20 @@ returns a list of \sphinxcode{\sphinxupquote{TimeTree}}’s containing only neig
 returns a list of \sphinxcode{\sphinxupquote{TimeTree}}’s containing only neighbours one \sphinxstyleemphasis{NNI move} away
 \\
 \hline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{TimeTree.nwk\_to\_cluster()}}
+&
+\sphinxAtStartPar
+computes the set of all clades present in the given \sphinxcode{\sphinxupquote{TimeTree}}
+\\
+\hline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{TimeTree.apply\_new\_taxa\_map()}}
+&
+\sphinxAtStartPar
+applies a new taxa map (in form of a dictionary) to a \sphinxcode{\sphinxupquote{TimeTree}}
+\\
+\hline
 \end{tabulary}
 \par
 \sphinxattableend\end{savenotes}
@@ -268,7 +263,7 @@ returns a list of \sphinxcode{\sphinxupquote{TimeTree}}’s containing only neig
 This is an example of how to access the different attributes of a TimeTree object:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{time\PYGZus{}trees} \PYG{k+kn}{import} \PYG{n}{TimeTree}
+\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{time\PYGZus{}trees} \PYG{k+kn}{import} \PYG{n}{TimeTree}\PYG{p}{,} \PYG{n}{free\PYGZus{}tree\PYGZus{}list}
 
 
 \PYG{c+c1}{\PYGZsh{} Initialize a time tree from a newick string}
@@ -282,7 +277,8 @@ This is an example of how to access the different attributes of a TimeTree objec
 
 \PYG{n}{tt}\PYG{o}{.}\PYG{n}{fp\PYGZus{}distance}\PYG{p}{(}\PYG{n}{tt}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Distance to another TimeTree \PYGZhy{}\PYGZhy{}\PYGZgt{} 0}
 
-\PYG{n}{tt}\PYG{o}{.}\PYG{n}{fp\PYGZus{}path}\PYG{p}{(}\PYG{n}{tt}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} A shortest path to another TimeTree \PYGZhy{}\PYGZhy{}\PYGZgt{} []}
+\PYG{n}{path} \PYG{o}{=} \PYG{n}{tt}\PYG{o}{.}\PYG{n}{fp\PYGZus{}path}\PYG{p}{(}\PYG{n}{tt}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} A shortest path to another TimeTree \PYGZhy{}\PYGZhy{}\PYGZgt{} []}
+\PYG{n}{free\PYGZus{}tree\PYGZus{}list}\PYG{p}{(}\PYG{n}{path}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Allocated memory needs to be freed after usage}
 
 \PYG{n}{tt}\PYG{o}{.}\PYG{n}{get\PYGZus{}newick}\PYG{p}{(}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Returns the newick string in ete3 format=5}
 
@@ -293,6 +289,10 @@ This is an example of how to access the different attributes of a TimeTree objec
 \PYG{n}{tt}\PYG{o}{.}\PYG{n}{rank\PYGZus{}neighbours}\PYG{p}{(}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} list of TimeTree obtained by doing all possible rank moves on tt}
 
 \PYG{n}{tt}\PYG{o}{.}\PYG{n}{nni\PYGZus{}neighbours}\PYG{p}{(}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} list of TimeTree obtained by doing all possible NNI moves on tt}
+
+\PYG{n}{tt}\PYG{o}{.}\PYG{n}{nwk\PYGZus{}to\PYGZus{}cluster}\PYG{p}{(}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} returns set of all clades in the tree}
+
+\PYG{n}{tt}\PYG{o}{.}\PYG{n}{apply\PYGZus{}new\PYGZus{}taxa\PYGZus{}map}\PYG{p}{(}\PYG{n}{new\PYGZus{}map}\PYG{p}{,} \PYG{n}{old\PYGZus{}map}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Will apply the new taxa map to the tree}
 \end{sphinxVerbatim}
 
 
@@ -338,7 +338,7 @@ See the \sphinxcode{\sphinxupquote{ete3}} \sphinxhref{http://etetoolkit.org/docs
 \section{The TimeTreeSet class}
 \label{\detokenize{trees:the-timetreeset-class}}
 \sphinxAtStartPar
-A \sphinxcode{\sphinxupquote{TimeTreeSet}} is an iterable list of \sphinxcode{\sphinxupquote{TimeTree}} objects, which can be initialized with a nexus file.
+A \sphinxcode{\sphinxupquote{TimeTreeSet}} is an iterable list of \sphinxcode{\sphinxupquote{TimeTree}} objects, which is initialized with a nexus file (as returned by a BEAST2 analysis), hence it contains a taxa map.
 
 
 \begin{savenotes}\sphinxattablestart
@@ -392,7 +392,28 @@ returns the distances between the trees at postition i and j
 \sphinxcode{\sphinxupquote{TimeTreeSet.fp\_path(i, j)}}
 &
 \sphinxAtStartPar
-returns a shortest path (list of \sphinxcode{\sphinxupquote{TREE}}) between the trees at postition i and j
+returns a shortest path (\sphinxcode{\sphinxupquote{TREE\_LIST}}) between the trees at postition i and j
+\\
+\hline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{TimeTreeSet.copy()}}
+&
+\sphinxAtStartPar
+returns a copy of the list of :class:{\color{red}\bfseries{}\textasciigrave{}}TimeTree\textasciigrave{}s
+\\
+\hline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{TimeTreeSet.get\_common\_clades()}}
+&
+\sphinxAtStartPar
+returns and computes the set of shared clades among all trees in the set
+\\
+\hline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{TimeTreeSet.change\_mapping(new\_map)}}
+&
+\sphinxAtStartPar
+Will apply the given new taxa map to all trees in the set
 \\
 \hline
 \end{tabulary}
@@ -406,7 +427,7 @@ returns a shortest path (list of \sphinxcode{\sphinxupquote{TREE}}) between the 
 A TimeTreeSet object can be initialized with a path to a nexus file.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{time\PYGZus{}trees} \PYG{k+kn}{import} \PYG{n}{TimeTreeSet}
+\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{time\PYGZus{}trees} \PYG{k+kn}{import} \PYG{n}{TimeTreeSet}\PYG{p}{,} \PYG{n}{free\PYGZus{}tree\PYGZus{}list}
 
 
 \PYG{c+c1}{\PYGZsh{} Initializing with a path to a nexus tree file}
@@ -424,32 +445,15 @@ A TimeTreeSet object can be initialized with a path to a nexus file.
 \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{tts}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Returns the number of trees in the TimeTreeSet object}
 
 \PYG{n}{tts}\PYG{o}{.}\PYG{n}{fp\PYGZus{}distance}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,} \PYG{n}{j}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Returns the distance between trees i and j}
-\PYG{n}{tts}\PYG{o}{.}\PYG{n}{fp\PYGZus{}path}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,} \PYG{n}{j}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Returns a shortest path between trees i and j}
+\PYG{n}{path} \PYG{o}{=} \PYG{n}{tts}\PYG{o}{.}\PYG{n}{fp\PYGZus{}path}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,} \PYG{n}{j}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Returns a shortest path between trees i and j}
+\PYG{n}{free\PYGZus{}tree\PYGZus{}list}\PYG{p}{(}\PYG{n}{path}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Allocated memory needs to be freed after usage}
 \end{sphinxVerbatim}
-
-
-\subsection{Writing trees}
-\label{\detokenize{trees:writing-trees}}
-\sphinxAtStartPar
-Still WIP
-
-
-\section{Random trees}
-\label{\detokenize{trees:random-trees}}
-\sphinxAtStartPar
-STILL WIP
-
-
-\section{Combining multiple TimeTreeSets}
-\label{\detokenize{trees:combining-multiple-timetreesets}}
-\sphinxAtStartPar
-Still WIP
 
 
 \section{General Functions}
 \label{\detokenize{trees:general-functions}}
 \sphinxAtStartPar
-A list of the direct functions and their arguments.
+A list of the functions available from the module ‘treeoclock.trees.time\_trees’.
 
 
 \begin{savenotes}\sphinxattablestart
@@ -496,21 +500,21 @@ returns a list of \sphinxcode{\sphinxupquote{TimeTree}} objects contained in giv
 \sphinxcode{\sphinxupquote{time\_trees.get\_mapping\_dict(file)}}
 &
 \sphinxAtStartPar
-returns a dictionary containg the taxa to integer transaltion of the given file
+returns a \sphinxcode{\sphinxupquote{dictionary}} containing the taxa to integer translation of the given file
 \\
 \hline
 \sphinxAtStartPar
 \sphinxcode{\sphinxupquote{time\_trees.findpath\_distance(t1, t2)}}
 &
 \sphinxAtStartPar
-Computes the distance between t1 and t2
+Computes the distance between t1 and t2, returns \sphinxcode{\sphinxupquote{int}}
 \\
 \hline
 \sphinxAtStartPar
 \sphinxcode{\sphinxupquote{time\_trees.findpath\_path(t1, t2)}}
 &
 \sphinxAtStartPar
-Computes the path between t1 and t2
+Computes the path between t1 and t2, returns \sphinxcode{\sphinxupquote{TREE\_LIST}}, after usage memory needs to be freed!
 \\
 \hline
 \end{tabulary}
@@ -520,8 +524,48 @@ Computes the path between t1 and t2
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
 Both functions \sphinxcode{\sphinxupquote{time\_trees.findpath\_distance(t1, t2)}} and \sphinxcode{\sphinxupquote{time\_trees.findpath\_path(t1, t2)}}
-can be called with t1 and t2 being either a \sphinxcode{\sphinxupquote{TREE}}, \sphinxcode{\sphinxupquote{TimeTree}} or \sphinxcode{\sphinxupquote{ete3.Tree}}
+can be called with t1 and t2 being either a \sphinxcode{\sphinxupquote{TREE}}, \sphinxcode{\sphinxupquote{TimeTree}} or \sphinxcode{\sphinxupquote{ete3.Tree}}, both have to be the same type!
 \end{sphinxadmonition}
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+When using \sphinxcode{\sphinxupquote{time\_trees.findpath\_path(t1, t2)}} the c code is allocating memory to the returned object.
+This memory needs to be freed with the \sphinxcode{\sphinxupquote{time\_trees.free\_tree\_list(tree\_list)}} function to avoid memory leaks, see more info below!
+\end{sphinxadmonition}
+
+
+\subsection{Working with findpath\_path and c memory}
+\label{\detokenize{trees:working-with-findpath-path-and-c-memory}}
+\sphinxAtStartPar
+When using the \sphinxcode{\sphinxupquote{time\_trees.findpath\_path(t1, t2)}} implementation it is important to free the memory of the
+returned \sphinxcode{\sphinxupquote{TREE\_LIST}} object. When calling the function the package will also throw a UserWarning indicating this.
+Below are some examples of how to use the findpath\_path implementation and the underlying class \sphinxcode{\sphinxupquote{TREE\_LIST}}.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{time\PYGZus{}trees} \PYG{k+kn}{import} \PYG{n}{TimeTreeSet}\PYG{p}{,} \PYG{n}{free\PYGZus{}tree\PYGZus{}list}
+
+\PYG{n}{t1} \PYG{o}{=} \PYG{n}{TimeTree}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{t2} \PYG{o}{=} \PYG{n}{TimeTree}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{n}{path} \PYG{o}{=} \PYG{n}{findpath\PYGZus{}path}\PYG{p}{(}\PYG{n}{t1}\PYG{o}{.}\PYG{n}{ctree}\PYG{p}{,} \PYG{n}{t2}\PYG{o}{.}\PYG{n}{ctree}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Will throw a UserWarning}
+\PYG{n}{free\PYGZus{}tree\PYGZus{}list}\PYG{p}{(}\PYG{n}{path}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Free the memory allocated by c}
+
+\PYG{c+c1}{\PYGZsh{} Calling findpath\PYGZus{}path without the UserWarning being printed}
+\PYG{k}{with} \PYG{n}{warnings}\PYG{o}{.}\PYG{n}{catch\PYGZus{}warnings}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+    \PYG{c+c1}{\PYGZsh{} Ignores the \PYGZsq{}Free memory\PYGZsq{} warning issued by findpath\PYGZus{}path}
+    \PYG{n}{warnings}\PYG{o}{.}\PYG{n}{simplefilter}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ignore}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{} All following calls do the same thing, but the memory is not being freed}
+    \PYG{n}{path} \PYG{o}{=} \PYG{n}{findpath\PYGZus{}path}\PYG{p}{(}\PYG{n}{t1}\PYG{p}{,} \PYG{n}{t2}\PYG{p}{)}
+    \PYG{n}{path} \PYG{o}{=} \PYG{n}{findpath\PYGZus{}path}\PYG{p}{(}\PYG{n}{t1}\PYG{o}{.}\PYG{n}{ctree}\PYG{p}{,} \PYG{n}{t2}\PYG{o}{.}\PYG{n}{ctree}\PYG{p}{)}
+    \PYG{n}{path} \PYG{o}{=} \PYG{n}{findpath\PYGZus{}path}\PYG{p}{(}\PYG{n}{t1}\PYG{o}{.}\PYG{n}{etree}\PYG{p}{,} \PYG{n}{t2}\PYG{o}{.}\PYG{n}{etree}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Use the c code to free the memory}
+\PYG{k+kn}{from} \PYG{n+nn}{ctypes} \PYG{k+kn}{import} \PYG{n}{CDLL}
+\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{\PYGZus{}ctrees} \PYG{k+kn}{import} \PYG{n}{TREE\PYGZus{}LIST}
+\PYG{n}{lib} \PYG{o}{=} \PYG{n}{CDLL}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{.../treeoclock/trees/findpath.so}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{lib}\PYG{o}{.}\PYG{n}{free\PYGZus{}treelist}\PYG{o}{.}\PYG{n}{argtypes} \PYG{o}{=} \PYG{p}{[}\PYG{n}{TREE\PYGZus{}LIST}\PYG{p}{]}
+\PYG{n}{lib}\PYG{o}{.}\PYG{n}{free\PYGZus{}treelist}\PYG{p}{(}\PYG{n}{path}\PYG{p}{)}
+\end{sphinxVerbatim}
 
 
 \section{Classes for the c library}
@@ -591,7 +635,8 @@ The attribute \sphinxcode{\sphinxupquote{root\_time}} is currently not being use
 \section{Class converter functions}
 \label{\detokenize{trees:class-converter-functions}}
 \sphinxAtStartPar
-These are found in \sphinxcode{\sphinxupquote{\_converter.py}}.
+These are found in \sphinxcode{\sphinxupquote{\_converter.py}} and convert one tree type into the other.
+When converting a ctree to an ete3 Tree the branch lengths are discrete integers since the ctrees do not have a branch length annotation.
 
 
 \begin{savenotes}\sphinxattablestart
@@ -640,25 +685,71 @@ recursively traverses a \sphinxcode{\sphinxupquote{TREE}} and generates an \sphi
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{summary:id3}}{\hyperref[\detokenize{summary:centroid-attributes}]{\sphinxcrossref{Centroid attributes}}}
+\phantomsection\label{\detokenize{summary:id3}}{\hyperref[\detokenize{summary:variation}]{\sphinxcrossref{Variation}}}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{summary:id4}}{\hyperref[\detokenize{summary:greedy}]{\sphinxcrossref{Greedy}}}
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{summary:id4}}{\hyperref[\detokenize{summary:centroid-variations}]{\sphinxcrossref{Centroid variations}}}
+\phantomsection\label{\detokenize{summary:id5}}{\hyperref[\detokenize{summary:inc-sub}]{\sphinxcrossref{Inc\_sub}}}
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{summary:id5}}{\hyperref[\detokenize{summary:computing-the-sos}]{\sphinxcrossref{Computing the SoS}}}
+\phantomsection\label{\detokenize{summary:id6}}{\hyperref[\detokenize{summary:iter-sub}]{\sphinxcrossref{Iter\_sub}}}
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{summary:id6}}{\hyperref[\detokenize{summary:sampling-the-neighbourhood}]{\sphinxcrossref{Sampling the neighbourhood}}}
+\phantomsection\label{\detokenize{summary:id7}}{\hyperref[\detokenize{summary:separate}]{\sphinxcrossref{Separate}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{summary:id8}}{\hyperref[\detokenize{summary:onlyone}]{\sphinxcrossref{Onlyone}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{summary:id9}}{\hyperref[\detokenize{summary:update-with-one}]{\sphinxcrossref{update\sphinxhyphen{}with\sphinxhyphen{}one}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{summary:id10}}{\hyperref[\detokenize{summary:online}]{\sphinxcrossref{Online}}}
 
 \end{itemize}
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{summary:id7}}{\hyperref[\detokenize{summary:frechet-mean}]{\sphinxcrossref{Frechet Mean}}}
+\phantomsection\label{\detokenize{summary:id11}}{\hyperref[\detokenize{summary:selecting-a-tree}]{\sphinxcrossref{Selecting a tree}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{summary:id12}}{\hyperref[\detokenize{summary:starting-tree}]{\sphinxcrossref{Starting tree}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{summary:id13}}{\hyperref[\detokenize{summary:subsample-size}]{\sphinxcrossref{Subsample size}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{summary:id14}}{\hyperref[\detokenize{summary:maximal-iterations}]{\sphinxcrossref{Maximal iterations}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{summary:id15}}{\hyperref[\detokenize{summary:computing-the-sos}]{\sphinxcrossref{Computing the SoS}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{summary:id16}}{\hyperref[\detokenize{summary:tree-logfile}]{\sphinxcrossref{Tree logfile}}}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{summary:id17}}{\hyperref[\detokenize{summary:annotation-of-a-centroid}]{\sphinxcrossref{Annotation of a centroid}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{summary:id18}}{\hyperref[\detokenize{summary:frechet-mean}]{\sphinxcrossref{Frechet Mean}}}
 
 \end{itemize}
 
@@ -668,98 +759,17 @@ recursively traverses a \sphinxcode{\sphinxupquote{TREE}} and generates an \sphi
 
 \section{The Centroid class}
 \label{\detokenize{summary:the-centroid-class}}
-\sphinxAtStartPar
-TODO: Change the start default to the Frechet Mean algorithm instead of last
-
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k}{class} \PYG{n+nc}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{greedy}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{n\PYGZus{}cores}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{,}
-                                  \PYG{n}{select}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{random}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{start}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{last}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{k}{class} \PYG{n+nc}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{greedy\PYGZus{}omp}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{n\PYGZus{}cores}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{,} \PYG{n}{select}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{random}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{start}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{FM}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{subsample\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{,}
+             \PYG{n}{tree\PYGZus{}log\PYGZus{}file}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{max\PYGZus{}iterations}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-Applying a variation of the centroid algorithm on a set of trees.
+This is used to setup a Centroid object which then takes a \sphinxcode{\sphinxupquote{TimeTreeSet}} as input to compute the centroid summary tree.
 
 
-\subsection{Centroid attributes}
-\label{\detokenize{summary:centroid-attributes}}
-
-\begin{savenotes}\sphinxattablestart
-\centering
-\begin{tabulary}{\linewidth}[t]{|T|T|}
-\hline
-\sphinxstyletheadfamily 
-\sphinxAtStartPar
-Method
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
-Description
-\\
-\hline
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{Centroid.variation}}
-&
-\sphinxAtStartPar
-Accesses the variation parameter which has to be in the list of specified variations.
-\\
-\hline
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{Centroid.n\_cores}}
-&
-\sphinxAtStartPar
-Accesses the number of Threads that will be used to compute the SoS value, using ThreadPool.
-\\
-\hline
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{Centroid.select}}
-&
-\sphinxAtStartPar
-Accesses the selection parameter, in case of multiple options choose a selected tree i.e. the first, last or a random tree.
-\\
-\hline
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{Centroid.start}}
-&
-\sphinxAtStartPar
-Accesses the start parameter, specifying at which point to start the centroid computation.
-\\
-\hline
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{Centroid.compute\_centroid(trees)}}
-&
-\sphinxAtStartPar
-Computes the centroid for a given set of trees, using the options that were selected via the other attributes of the \sphinxcode{\sphinxupquote{Centroid}}.
-\\
-\hline
-\end{tabulary}
-\par
-\sphinxattableend\end{savenotes}
-
-\sphinxAtStartPar
-Examples of how to set and use the attributes of a \sphinxcode{\sphinxupquote{Centroid}}:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{time\PYGZus{}trees} \PYG{k+kn}{import} \PYG{n}{TimeTreeSet}
-\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{summary}\PYG{n+nn}{.}\PYG{n+nn}{centroid} \PYG{k+kn}{import} \PYG{n}{Centroid}
-
-
-\PYG{c+c1}{\PYGZsh{} Initializing an empty Centroid class}
-\PYG{n}{mycen} \PYG{o}{=} \PYG{n}{Centroid}\PYG{p}{(}\PYG{p}{)}
-
-\PYG{n}{mycen}\PYG{o}{.}\PYG{n}{variation} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{inc\PYGZus{}sub}\PYG{l+s+s2}{\PYGZdq{}}  \PYG{c+c1}{\PYGZsh{} Changing the variation}
-
-\PYG{n}{mycen}\PYG{o}{.}\PYG{n}{n\PYGZus{}cores} \PYG{o}{=} \PYG{l+m+mi}{4}  \PYG{c+c1}{\PYGZsh{} Setting the number of Threads to use}
-
-\PYG{n}{mycen}\PYG{o}{.}\PYG{n}{select} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{first}\PYG{l+s+s2}{\PYGZdq{}}  \PYG{c+c1}{\PYGZsh{} Selection parameter set to the first tree found}
-
-\PYG{n}{mycen}\PYG{o}{.}\PYG{n}{start} \PYG{o}{=} \PYG{l+m+mi}{6}  \PYG{c+c1}{\PYGZsh{} Starting the algorithm from the sixth tree in the set (Error if non\PYGZhy{}existant)}
-
-\PYG{c+c1}{\PYGZsh{} Computing the centroid for an empty TimeTreeSet}
-\PYG{n}{cen\PYGZus{}tree}\PYG{p}{,} \PYG{n}{sos} \PYG{o}{=} \PYG{n}{mycen}\PYG{o}{.}\PYG{n}{compute\PYGZus{}centroid}\PYG{p}{(}\PYG{n}{TimeTreeSet}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-\subsection{Centroid variations}
-\label{\detokenize{summary:centroid-variations}}
+\subsection{Variation}
+\label{\detokenize{summary:variation}}
 \sphinxAtStartPar
 The variation parameter of a \sphinxcode{\sphinxupquote{Centroid}} has to be one in {[}“inc\_sub”, “greedy”{]} (TODO: Still WIP).
 
@@ -777,38 +787,52 @@ Description
 \\
 \hline
 \sphinxAtStartPar
-greedy
+{\hyperref[\detokenize{summary:var-greedy}]{\sphinxcrossref{\DUrole{std,std-ref}{Greedy}}}}
 &
 \sphinxAtStartPar
 Computes a centroid via the greedy path and neighbourhood search. Only considering the tree with the most imporved SoS value in each iteration.
 \\
 \hline
 \sphinxAtStartPar
-inc\_sub
+{\hyperref[\detokenize{summary:var-incsub}]{\sphinxcrossref{\DUrole{std,std-ref}{Inc\_sub}}}}
 &
 \sphinxAtStartPar
-Starts with a subsample of trees from the set, computes the greedy centroid variant and adds more trees to the subsample until all trees are part of the sample.
+Starts with a subsample of trees from the set, computes the greedy\_omp centroid variant and adds more trees to the subsample until all trees are part of the sample.
 \\
 \hline
 \sphinxAtStartPar
-WIP
+{\hyperref[\detokenize{summary:var-itersub}]{\sphinxcrossref{\DUrole{std,std-ref}{Iter\_sub}}}}
 &
 \sphinxAtStartPar
-WIP
+Starts with a subsample of trees from the set, computes the greedy\_omp centroid variant and then resamples a new subset, using the previous centroid as the starting tree.
 \\
 \hline
 \sphinxAtStartPar
-WIP
+{\hyperref[\detokenize{summary:var-separate}]{\sphinxcrossref{\DUrole{std,std-ref}{Separate}}}}
 &
 \sphinxAtStartPar
-WIP
+Only computes rank move neighbours if the tree contains all common clades of the tree set
 \\
 \hline
 \sphinxAtStartPar
-WIP
+{\hyperref[\detokenize{summary:var-onlyone}]{\sphinxcrossref{\DUrole{std,std-ref}{Onlyone}}}}
 &
 \sphinxAtStartPar
-WIP
+Prefers either NNI or Rank moves and switches this if a local optimum is reached
+\\
+\hline
+\sphinxAtStartPar
+{\hyperref[\detokenize{summary:var-update-with-one}]{\sphinxcrossref{\DUrole{std,std-ref}{update\sphinxhyphen{}with\sphinxhyphen{}one}}}}
+&
+\sphinxAtStartPar
+Similar to the incsub variation, only one tree at a time is added to the subsample
+\\
+\hline
+\sphinxAtStartPar
+{\hyperref[\detokenize{summary:var-online}]{\sphinxcrossref{\DUrole{std,std-ref}{Online}}}}
+&
+\sphinxAtStartPar
+Mimicks an online approach where samples arrive one after another and the centroid is computed after each sample starting from the previous centroid
 \\
 \hline
 \end{tabulary}
@@ -816,14 +840,156 @@ WIP
 \sphinxattableend\end{savenotes}
 
 
+\subsubsection{Greedy}
+\label{\detokenize{summary:greedy}}\label{\detokenize{summary:var-greedy}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{greedy\PYGZus{}omp}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} default, using multiple processes in c!}
+\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{greedy}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} pure python version}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Inc\_sub}
+\label{\detokenize{summary:inc-sub}}\label{\detokenize{summary:var-incsub}}
+\sphinxAtStartPar
+The parameter subsample\_size defines the size of the subsample of trees that is added each iteration.
+The parameter max\_iterations defines the number of iterations, if it is None the regular break is defined whenever an
+iteration is not successful at improving the previous centroid.
+If it is an integer then it defines the number of iterations that will subsample, if it is 0 the start tree will be returned.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{inc\PYGZus{}sub}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{subsample\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{500}\PYG{p}{,} \PYG{n}{max\PYGZus{}iterations}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Iter\_sub}
+\label{\detokenize{summary:iter-sub}}\label{\detokenize{summary:var-itersub}}
+\sphinxAtStartPar
+The parameter subsample\_size defines the size of the subsample of trees that is sampled each iteration.
+The parameter max\_iterations defines the number of iterations, if it is None the regular break is defined whenever an
+iteration is not successful at improving the previous centroid.
+If it is an integer then it defines the number of iterations that will subsample, if it is 0 the start tree will be returned.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{iter\PYGZus{}sub}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{subsample\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{500}\PYG{p}{,} \PYG{n}{max\PYGZus{}iterations}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Separate}
+\label{\detokenize{summary:separate}}\label{\detokenize{summary:var-separate}}
+\sphinxAtStartPar
+Will only use one move, current implementation is for NNI moves only, needs to be switched in source code (\_variations.py, line 147).
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{separate}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Onlyone}
+\label{\detokenize{summary:onlyone}}\label{\detokenize{summary:var-onlyone}}
+\sphinxAtStartPar
+Will always do one move (starting with rank moves as of current implementation) and switch the move type whenever a local optimum is found.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{onlyone}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\subsubsection{update\sphinxhyphen{}with\sphinxhyphen{}one}
+\label{\detokenize{summary:update-with-one}}\label{\detokenize{summary:var-update-with-one}}
+\sphinxAtStartPar
+Similar to the inc\sphinxhyphen{}sub variation but only one new tree is added in each iteration.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{update\PYGZus{}with\PYGZus{}one}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Online}
+\label{\detokenize{summary:online}}\label{\detokenize{summary:var-online}}
+\sphinxAtStartPar
+Mimicks an online approach where the trees arrive one by one in the given order.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{online}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\subsection{Selecting a tree}
+\label{\detokenize{summary:selecting-a-tree}}
+\sphinxAtStartPar
+This is only the case if multiple trees have the same SoS value.
+The defualt is random and the options are either random, first or last.
+The second two options are depending on the ordering which is dictated by the way the neighbourhood
+is computed.
+
+
+\subsection{Starting tree}
+\label{\detokenize{summary:starting-tree}}
+\sphinxAtStartPar
+There are the options to start with the last, the first or any given index of tree from the given tree set.
+The default option however is the sorted Frechet Mean tree (ref), see the doc on FM for more detail.
+
+
+\subsection{Subsample size}
+\label{\detokenize{summary:subsample-size}}
+\sphinxAtStartPar
+This is used by some variations and can be set to any integer number (default is 200).
+This number indicates the size of the subsample that the variation will use in its iterations.
+See the incsub or itersub variations
+
+
+\subsection{Maximal iterations}
+\label{\detokenize{summary:maximal-iterations}}
+\sphinxAtStartPar
+This is used to limit the number of iterations the iterative subsampling and increasing subsampling centroid versions are computing.
+If it is None (default) then the regular break points of those variations apply, otherwise it will only compute upto max\_iteration
+many iterations.
+
+
 \subsection{Computing the SoS}
 \label{\detokenize{summary:computing-the-sos}}
+\sphinxAtStartPar
+The n\_cores parameters defines the number of cores to use, if \sphinxhyphen{}1 all available cores are used (default).
 
-\subsection{Sampling the neighbourhood}
-\label{\detokenize{summary:sampling-the-neighbourhood}}
+
+\subsection{Tree logfile}
+\label{\detokenize{summary:tree-logfile}}
+\sphinxAtStartPar
+This option will write the trees of each centroid iteration to the given file path.
+This includes the actual centroid as the last tree.
+Can be used for further analysis.
+
+\sphinxAtStartPar
+Note that for incsub for example the tree is logged after an iteration on the subsample.
+This results in much smaller log files.
+
+
+\section{Annotation of a centroid}
+\label{\detokenize{summary:annotation-of-a-centroid}}
+\sphinxAtStartPar
+To keep the discrete ranks of a centroid use this annotation method.
+Each rank get assigned the average height of that rank in the given tree set, guaranteed to keep the same ranked tree after the annotation.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{summary}\PYG{n+nn}{.}\PYG{n+nn}{annotate\PYGZus{}centroid} \PYG{k+kn}{import} \PYG{n}{annotate\PYGZus{}centroid}
+\PYG{n}{cen}\PYG{p}{,} \PYG{n}{sos} \PYG{o}{=} \PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{greedy}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{compute\PYGZus{}centroid}\PYG{p}{(}\PYG{n}{my\PYGZus{}tts}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} centroid of the TimeTreeSet my\PYGZus{}tts}
+\PYG{n}{annotated\PYGZus{}cen} \PYG{o}{=} \PYG{n}{annotate\PYGZus{}centroid}\PYG{p}{(}\PYG{n}{cen}\PYG{p}{,} \PYG{n}{my\PYGZus{}tts}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Annotation with the branch lengths from the TimeTreeSet my\PYGZus{}tts}
+\PYG{c+c1}{\PYGZsh{} the annotated\PYGZus{}cen is a TimeTree object for further use such as writing the newick to a file}
+\end{sphinxVerbatim}
+
 
 \section{Frechet Mean}
 \label{\detokenize{summary:frechet-mean}}
+\sphinxAtStartPar
+A version of Sturms algorithm adapted to the RNNI tree space, based on computing shortest paths with the findpath algorithm.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{summary}\PYG{n+nn}{.}\PYG{n+nn}{frechet\PYGZus{}mean} \PYG{k+kn}{import} \PYG{n}{frechet\PYGZus{}mean}\PYG{p}{,} \PYG{n}{frechet\PYGZus{}mean\PYGZus{}sort}
+\PYG{n}{fm} \PYG{o}{=} \PYG{n}{frechet\PYGZus{}mean}\PYG{p}{(}\PYG{n}{my\PYGZus{}tts}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} random selection of trees}
+\PYG{n}{fm\PYGZus{}sort} \PYG{o}{=} \PYG{n}{frechet\PYGZus{}mean\PYGZus{}sort}\PYG{p}{(}\PYG{n}{my\PYGZus{}tts}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} trees are sorted from highest to lowest Sum of squared distances}
+\PYG{c+c1}{\PYGZsh{} The idea is that tres with low sum of squared distances are used in the end of the algorithm to refine the tree}
+\end{sphinxVerbatim}
+
 
 \chapter{Indices and tables}
 \label{\detokenize{index:indices-and-tables}}\begin{itemize}
