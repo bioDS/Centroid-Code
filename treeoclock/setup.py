@@ -1,14 +1,13 @@
-from setuptools import setup
-
+from setuptools import setup, find_packages
 
 setup(name='treeoclock',
       version='1.0.0',
       description='A package for discrete time trees',
-      # url='http://github.com/storborg/funniest',  # todo
+      url='https://github.com/bioDS/Centroid-Code',  # this is only for the paper release
       author='Lars Berling',
-      # author_email='flyingcircus@example.com',
+      author_email='berlinglars96@gmail.com',
       license='MIT',
-      packages=['treeoclock'],
+      packages=find_packages(),
       install_requires=['ete3',
                         'pandas',
                         'seaborn'
