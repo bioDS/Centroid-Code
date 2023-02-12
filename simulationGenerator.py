@@ -6,9 +6,9 @@ import time
 
 from subprocess import Popen
 from rpy2 import robjects
-from treeoclock.summary.annotate_centroid import annotate_centroid
-from treeoclock.summary.centroid import Centroid
-from treeoclock.trees.time_trees import TimeTreeSet
+from tetres.summary.annotate_centroid import annotate_centroid
+from tetres.summary.centroid import Centroid
+from tetres.trees.time_trees import TimeTreeSet
 
 global re_tree
 re_tree = re.compile('\t?tree .*$', re.I)
