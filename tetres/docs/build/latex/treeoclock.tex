@@ -60,7 +60,7 @@
 
 
 
-\title{treeoclock}
+\title{tetres}
 \date{Aug 15, 2022}
 \release{1.0.0}
 \author{Lars Berling}
@@ -263,7 +263,7 @@ applies a new taxa map (in form of a dictionary) to a \sphinxcode{\sphinxupquote
 This is an example of how to access the different attributes of a TimeTree object:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{time\PYGZus{}trees} \PYG{k+kn}{import} \PYG{n}{TimeTree}\PYG{p}{,} \PYG{n}{free\PYGZus{}tree\PYGZus{}list}
+\PYG{k+kn}{from} \PYG{n+nn}{tetres}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{time\PYGZus{}trees} \PYG{k+kn}{import} \PYG{n}{TimeTree}\PYG{p}{,} \PYG{n}{free\PYGZus{}tree\PYGZus{}list}
 
 
 \PYG{c+c1}{\PYGZsh{} Initialize a time tree from a newick string}
@@ -303,7 +303,7 @@ Via the \sphinxcode{\sphinxupquote{ete3.Tree}} object the respective function of
 For example drawing and saving a tree to a file:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{time\PYGZus{}trees} \PYG{k+kn}{import} \PYG{n}{TimeTree}
+\PYG{k+kn}{from} \PYG{n+nn}{tetres}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{time\PYGZus{}trees} \PYG{k+kn}{import} \PYG{n}{TimeTree}
 
 \PYG{n}{tt} \PYG{o}{=} \PYG{n}{TimeTree}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{((1:3,5:3):1,(4:2,(3:1,2:1):1):2);}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 
@@ -427,7 +427,7 @@ Will apply the given new taxa map to all trees in the set
 A TimeTreeSet object can be initialized with a path to a nexus file.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{time\PYGZus{}trees} \PYG{k+kn}{import} \PYG{n}{TimeTreeSet}\PYG{p}{,} \PYG{n}{free\PYGZus{}tree\PYGZus{}list}
+\PYG{k+kn}{from} \PYG{n+nn}{tetres}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{time\PYGZus{}trees} \PYG{k+kn}{import} \PYG{n}{TimeTreeSet}\PYG{p}{,} \PYG{n}{free\PYGZus{}tree\PYGZus{}list}
 
 
 \PYG{c+c1}{\PYGZsh{} Initializing with a path to a nexus tree file}
@@ -453,7 +453,7 @@ A TimeTreeSet object can be initialized with a path to a nexus file.
 \section{General Functions}
 \label{\detokenize{trees:general-functions}}
 \sphinxAtStartPar
-A list of the functions available from the module ‘treeoclock.trees.time\_trees’.
+A list of the functions available from the module ‘tetres.trees.time\_trees’.
 
 
 \begin{savenotes}\sphinxattablestart
@@ -542,7 +542,7 @@ returned \sphinxcode{\sphinxupquote{TREE\_LIST}} object. When calling the functi
 Below are some examples of how to use the findpath\_path implementation and the underlying class \sphinxcode{\sphinxupquote{TREE\_LIST}}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{time\PYGZus{}trees} \PYG{k+kn}{import} \PYG{n}{TimeTreeSet}\PYG{p}{,} \PYG{n}{free\PYGZus{}tree\PYGZus{}list}
+\PYG{k+kn}{from} \PYG{n+nn}{tetres}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{time\PYGZus{}trees} \PYG{k+kn}{import} \PYG{n}{TimeTreeSet}\PYG{p}{,} \PYG{n}{free\PYGZus{}tree\PYGZus{}list}
 
 \PYG{n}{t1} \PYG{o}{=} \PYG{n}{TimeTree}\PYG{p}{(}\PYG{p}{)}
 \PYG{n}{t2} \PYG{o}{=} \PYG{n}{TimeTree}\PYG{p}{(}\PYG{p}{)}
@@ -561,8 +561,8 @@ Below are some examples of how to use the findpath\_path implementation and the 
 
 \PYG{c+c1}{\PYGZsh{} Use the c code to free the memory}
 \PYG{k+kn}{from} \PYG{n+nn}{ctypes} \PYG{k+kn}{import} \PYG{n}{CDLL}
-\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{\PYGZus{}ctrees} \PYG{k+kn}{import} \PYG{n}{TREE\PYGZus{}LIST}
-\PYG{n}{lib} \PYG{o}{=} \PYG{n}{CDLL}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{.../treeoclock/trees/findpath.so}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{k+kn}{from} \PYG{n+nn}{tetres}\PYG{n+nn}{.}\PYG{n+nn}{trees}\PYG{n+nn}{.}\PYG{n+nn}{\PYGZus{}ctrees} \PYG{k+kn}{import} \PYG{n}{TREE\PYGZus{}LIST}
+\PYG{n}{lib} \PYG{o}{=} \PYG{n}{CDLL}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{.../tetres/trees/findpath.so}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 \PYG{n}{lib}\PYG{o}{.}\PYG{n}{free\PYGZus{}treelist}\PYG{o}{.}\PYG{n}{argtypes} \PYG{o}{=} \PYG{p}{[}\PYG{n}{TREE\PYGZus{}LIST}\PYG{p}{]}
 \PYG{n}{lib}\PYG{o}{.}\PYG{n}{free\PYGZus{}treelist}\PYG{p}{(}\PYG{n}{path}\PYG{p}{)}
 \end{sphinxVerbatim}
@@ -760,7 +760,7 @@ recursively traverses a \sphinxcode{\sphinxupquote{TREE}} and generates an \sphi
 \section{The Centroid class}
 \label{\detokenize{summary:the-centroid-class}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k}{class} \PYG{n+nc}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{greedy\PYGZus{}omp}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{n\PYGZus{}cores}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{,} \PYG{n}{select}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{random}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{start}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{FM}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{subsample\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{,}
+\PYG{k}{class} \PYG{n+nc}{tetres}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{greedy\PYGZus{}omp}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{n\PYGZus{}cores}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{,} \PYG{n}{select}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{random}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{start}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{FM}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{subsample\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{,}
              \PYG{n}{tree\PYGZus{}log\PYGZus{}file}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{max\PYGZus{}iterations}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
 \end{sphinxVerbatim}
 
@@ -843,8 +843,8 @@ Mimicks an online approach where samples arrive one after another and the centro
 \subsubsection{Greedy}
 \label{\detokenize{summary:greedy}}\label{\detokenize{summary:var-greedy}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{greedy\PYGZus{}omp}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} default, using multiple processes in c!}
-\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{greedy}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} pure python version}
+\PYG{n}{tetres}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{greedy\PYGZus{}omp}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} default, using multiple processes in c!}
+\PYG{n}{tetres}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{greedy}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} pure python version}
 \end{sphinxVerbatim}
 
 
@@ -857,7 +857,7 @@ iteration is not successful at improving the previous centroid.
 If it is an integer then it defines the number of iterations that will subsample, if it is 0 the start tree will be returned.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{inc\PYGZus{}sub}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{subsample\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{500}\PYG{p}{,} \PYG{n}{max\PYGZus{}iterations}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
+\PYG{n}{tetres}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{inc\PYGZus{}sub}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{subsample\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{500}\PYG{p}{,} \PYG{n}{max\PYGZus{}iterations}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 
@@ -870,7 +870,7 @@ iteration is not successful at improving the previous centroid.
 If it is an integer then it defines the number of iterations that will subsample, if it is 0 the start tree will be returned.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{iter\PYGZus{}sub}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{subsample\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{500}\PYG{p}{,} \PYG{n}{max\PYGZus{}iterations}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
+\PYG{n}{tetres}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{iter\PYGZus{}sub}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{subsample\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{500}\PYG{p}{,} \PYG{n}{max\PYGZus{}iterations}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 
@@ -880,7 +880,7 @@ If it is an integer then it defines the number of iterations that will subsample
 Will only use one move, current implementation is for NNI moves only, needs to be switched in source code (\_variations.py, line 147).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{separate}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{tetres}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{separate}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 
@@ -890,7 +890,7 @@ Will only use one move, current implementation is for NNI moves only, needs to b
 Will always do one move (starting with rank moves as of current implementation) and switch the move type whenever a local optimum is found.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{onlyone}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{tetres}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{onlyone}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 
@@ -900,7 +900,7 @@ Will always do one move (starting with rank moves as of current implementation) 
 Similar to the inc\sphinxhyphen{}sub variation but only one new tree is added in each iteration.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{update\PYGZus{}with\PYGZus{}one}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{tetres}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{update\PYGZus{}with\PYGZus{}one}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 
@@ -910,7 +910,7 @@ Similar to the inc\sphinxhyphen{}sub variation but only one new tree is added in
 Mimicks an online approach where the trees arrive one by one in the given order.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{treeoclock}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{online}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{tetres}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{online}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 
@@ -971,7 +971,7 @@ To keep the discrete ranks of a centroid use this annotation method.
 Each rank get assigned the average height of that rank in the given tree set, guaranteed to keep the same ranked tree after the annotation.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{summary}\PYG{n+nn}{.}\PYG{n+nn}{annotate\PYGZus{}centroid} \PYG{k+kn}{import} \PYG{n}{annotate\PYGZus{}centroid}
+\PYG{k+kn}{from} \PYG{n+nn}{tetres}\PYG{n+nn}{.}\PYG{n+nn}{summary}\PYG{n+nn}{.}\PYG{n+nn}{annotate\PYGZus{}centroid} \PYG{k+kn}{import} \PYG{n}{annotate\PYGZus{}centroid}
 \PYG{n}{cen}\PYG{p}{,} \PYG{n}{sos} \PYG{o}{=} \PYG{n}{Centroid}\PYG{p}{(}\PYG{n}{variation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{greedy}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{compute\PYGZus{}centroid}\PYG{p}{(}\PYG{n}{my\PYGZus{}tts}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} centroid of the TimeTreeSet my\PYGZus{}tts}
 \PYG{n}{annotated\PYGZus{}cen} \PYG{o}{=} \PYG{n}{annotate\PYGZus{}centroid}\PYG{p}{(}\PYG{n}{cen}\PYG{p}{,} \PYG{n}{my\PYGZus{}tts}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Annotation with the branch lengths from the TimeTreeSet my\PYGZus{}tts}
 \PYG{c+c1}{\PYGZsh{} the annotated\PYGZus{}cen is a TimeTree object for further use such as writing the newick to a file}
@@ -984,7 +984,7 @@ Each rank get assigned the average height of that rank in the given tree set, gu
 A version of Sturms algorithm adapted to the RNNI tree space, based on computing shortest paths with the findpath algorithm.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{from} \PYG{n+nn}{treeoclock}\PYG{n+nn}{.}\PYG{n+nn}{summary}\PYG{n+nn}{.}\PYG{n+nn}{frechet\PYGZus{}mean} \PYG{k+kn}{import} \PYG{n}{frechet\PYGZus{}mean}\PYG{p}{,} \PYG{n}{frechet\PYGZus{}mean\PYGZus{}sort}
+\PYG{k+kn}{from} \PYG{n+nn}{tetres}\PYG{n+nn}{.}\PYG{n+nn}{summary}\PYG{n+nn}{.}\PYG{n+nn}{frechet\PYGZus{}mean} \PYG{k+kn}{import} \PYG{n}{frechet\PYGZus{}mean}\PYG{p}{,} \PYG{n}{frechet\PYGZus{}mean\PYGZus{}sort}
 \PYG{n}{fm} \PYG{o}{=} \PYG{n}{frechet\PYGZus{}mean}\PYG{p}{(}\PYG{n}{my\PYGZus{}tts}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} random selection of trees}
 \PYG{n}{fm\PYGZus{}sort} \PYG{o}{=} \PYG{n}{frechet\PYGZus{}mean\PYGZus{}sort}\PYG{p}{(}\PYG{n}{my\PYGZus{}tts}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} trees are sorted from highest to lowest Sum of squared distances}
 \PYG{c+c1}{\PYGZsh{} The idea is that tres with low sum of squared distances are used in the end of the algorithm to refine the tree}

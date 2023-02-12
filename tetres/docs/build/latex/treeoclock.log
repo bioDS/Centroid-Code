@@ -2,8 +2,8 @@ This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**treeoclock.tex
-(./treeoclock.tex
+**tetres.tex
+(./tetres.tex
 LaTeX2e <2020-02-02> patch level 5
 L3 programming layer <2020-03-06> (./sphinxmanual.cls
 Document Class: sphinxmanual 2019/12/01 v2.3.0 Document class (Sphinx manual)
@@ -626,17 +626,17 @@ Package: hypcap 2016/05/16 v1.12 Adjusting the anchors of captions (HO)
 Package: sphinxmessages 2019/01/04 v2.0 Localized LaTeX macros (Sphinx team)
 )
 \@indexfile=\write4
-\openout4 = `treeoclock.idx'.
+\openout4 = `tetres.idx'.
 
 
-Writing index file treeoclock.idx
+Writing index file tetres.idx
 (/usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count295
 \l__pdf_internal_box=\box112
 )
-(./treeoclock.aux)
-\openout1 = `treeoclock.aux'.
+(./tetres.aux)
+\openout1 = `tetres.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
 LaTeX Font Info:    ... okay on input line 70.
@@ -737,9 +737,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 70.
 LaTeX Info: Redefining \pageref on input line 70.
 LaTeX Info: Redefining \nameref on input line 70.
- (./treeoclock.out) (./treeoclock.out)
+ (./tetres.out) (./tetres.out)
 \@outlinefile=\write5
-\openout5 = `treeoclock.out'.
+\openout5 = `tetres.out'.
 
 Package hyperref Info: Option `pageanchor' set `false' on input line 73.
 LaTeX Font Info:    Trying to load font information for T1+qhv on input line 73
@@ -765,9 +765,9 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 ]
-(./treeoclock.toc)
+(./tetres.toc)
 \tf@toc=\write6
-\openout6 = `treeoclock.toc'.
+\openout6 = `tetres.toc'.
 
  [1
 
@@ -876,15 +876,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 838--838
 
 ]
 Chapter 3.
-(./treeoclock.ind)
+(./tetres.ind)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1014.
  [15]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 1014.
- (./treeoclock.aux)
+ (./tetres.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1014.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1014.
 
-Package rerunfilecheck Info: File `treeoclock.out' has not changed.
+Package rerunfilecheck Info: File `tetres.out' has not changed.
 (rerunfilecheck)             Checksum: 53F49DFC59AA69001854E0B4C0071C59;4438.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1014.
  ) 
@@ -911,7 +911,7 @@ t.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb>
 </usr/local/texlive/2020/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/
 local/texlive/2020/texmf-dist/fonts/type1/public/txfonts/tcxtt.pfb></usr/local/
 texlive/2020/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on treeoclock.pdf (19 pages, 215578 bytes).
+Output written on tetres.pdf (19 pages, 215578 bytes).
 PDF statistics:
  392 PDF objects out of 1000 (max. 8388607)
  342 compressed objects within 4 object streams
