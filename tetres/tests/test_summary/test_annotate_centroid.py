@@ -13,5 +13,5 @@ def test_annotate_centroid(twelve_taxa_tts):
 
 def test_annotate_tree(five_taxa_tts):
     t = annotate_centroid(five_taxa_tts[0], five_taxa_tts)
-    assert t.get_newick(f=5) == '((1:3,2:3):1.66667,(3:2,(4:1,5:1):1):2.66667);',\
+    assert t.get_newick(f=5) == '((1:3,2:3):1,(3:2,(4:1,5:1):1):2);',\
         "Annotation of tree with branch-lengths failed!"
