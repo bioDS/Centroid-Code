@@ -31,12 +31,8 @@ def ete3_to_ctree(tree):
     distances = sorted(distances)
     # if not len(distances.keys()) == num_leaves - 1:
     if not len(set(distances)) == num_leaves - 1:
-        # TODO raise exception?!
-        raise ValueError(f"Distances to root {distances}")
-        # sys.exit(f'Distances to root not unique! \n'
-        #          f'This has to be resolved!'
-        #          f'{distances}')
-                 # f'{tree.write(format=5)}')
+        sys.exit('Distances to root/ height of clades not unique! \n'
+                 'This has to be resolved!')
     for node in tree.traverse('levelorder'):
         if len(node2leaves[node]) == 1:
             # if not node.children:
