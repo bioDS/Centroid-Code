@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(name='tetres',
-      version='1.0.0',
-      description='A package for discrete time trees',
+      version='0.0.1',
+      description='TimE TREe Statistics package',
       url='https://github.com/bioDS/Centroid-Code',  # this is only for the paper release
       author='Lars Berling',
       author_email='berlinglars96@gmail.com',
