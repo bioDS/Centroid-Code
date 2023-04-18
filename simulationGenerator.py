@@ -33,7 +33,6 @@ def sim_tree(n, working_dir):
         names(tree) <- c('TrueTree')
         write.nexus(tree, file ="{work_folder}/{working_dir}/true_{working_dir}.tree")
     ''')
-    # Generate the Cluster format of the sim-taxa tree
 
 
 def sim_alignment(n, l=800, r=0.005, nbr=''):
