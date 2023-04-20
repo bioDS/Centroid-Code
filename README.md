@@ -9,7 +9,7 @@ The simulation script contains comments and the functions should be self-explana
 # Installation
 
 Before using the package the c code contained in `/tetres/tetres/trees/` has to be manually compiled by running `make`.
-After that install the python package to your Python environment using the `pip install '/path/to/repo/tetres/'`.
+After that install the python package to your Python environment using the `pip install -e '/path/to/repo/tetres/'`.
 
 ## Running centroid on data
 
