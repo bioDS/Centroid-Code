@@ -15,6 +15,12 @@ re_tree = re.compile('\t?tree .*$', re.I)
 global work_folder
 work_folder = f"{os.path.dirname(os.path.realpath(__file__))}/Simulations"
 
+# The following path needs to be set to the correct locaiton of BEAST/treeannotator on your machine
+global BEAST_PATH
+BEAST_PATH = "/bin/beast2-mcmc"
+global TREEANNOTATOR_PATH
+TREEANNOTATOR_PATH = "/home/lbe74/beast/bin/treeannotator"
+
 
 def sim_tree(n, working_dir):
     # Simulates tree via the sim.taxa function in R (only internally since we do not need this tree)
@@ -25,7 +31,7 @@ def sim_tree(n, working_dir):
         library(maps)
         library(ape)
         library(phytools)
-        library(e1071)
+        # library(e1071)
         # tree <- rcoal({n}, tip.label = c(1:{n}), br = rdiscrete({n - 1}, probs = range(1:{n - 1})))
         # tree <- rcoal({n}, tip.label = c(1:{n}), br = 'coalescent')
         tree <- rcoal({n}, tip.label = c(1:{n}))
@@ -97,21 +103,20 @@ def run_beast(n, l, r, nbr=''):
     # Will execute Beast on the xml file for the given simulation via the beastier R package
 
     working_dir = f"{n}_{l}_{str(r - int(r)).split('.')[1]}"
-    if os.path.exists(f'/Applications/BEAST 2.6.3/bin/beast'):
-        beast = f'/Applications/BEAST\ 2.6.3/bin/beast'  # Mac OS path
-    else:
-        beast = f'/home/lars/.local/share/beast/bin/beast'  # Dora path
+
+    if not os.path.exists(BEAST_PATH):
+        raise ValueError("Need to set path to BEAST!")
+
     if nbr != '':
         working_dir += f'_{nbr}'
     
     cwd = os.getcwd()  # Getting current Working directory
     os.chdir(f"{work_folder}/{working_dir}/")
-    os.system(f"{beast} -beagle_cpu -overwrite -threads -1 {working_dir}.xml > beast_output.txt 2>&1")
+    os.system(f"{BEAST_PATH} -beagle_cpu -overwrite {working_dir}.xml > beast_output.txt 2>&1")
     os.chdir(cwd)  # Resetting the working directory
 
 
 def run_treeannotator(n, l, r, nbr='', heights="ca"):
-    # /Applications/BEAST\ 2.6.3/bin/treeannotator 10_800_004_0/10_800_004_0.trees MCC_1.tree
     # Runs the tree annotator on the given file producing the default MCC output
 
     if heights not in ["mean", "median", "ca"]:
@@ -124,12 +129,10 @@ def run_treeannotator(n, l, r, nbr='', heights="ca"):
     if not os.path.exists(
             f'{work_folder}/{working_dir}/MCC_{heights}.tree'):
 
-        if os.path.exists(f'/Applications/BEAST 2.6.3/bin/treeannotator'):
-            path = f'/Applications/BEAST\ 2.6.3/bin/treeannotator'  # Mac OS path
-        else:
-            path = f'/home/lars/.local/share/beast/bin/treeannotator'  # Dora path
+        if not os.path.exists(TREEANNOTATOR_PATH):
+            raise ValueError("Need to set path to BEAST!")
 
-        Popen(f'{path}'
+        Popen(f'{TREEANNOTATOR_PATH}'
               f' -heights {heights}'
               f' {work_folder}/{working_dir}/{working_dir}.trees'
               f' {work_folder}/{working_dir}/MCC_{heights}.tree',
