@@ -115,11 +115,14 @@ def run_beast(n, l, r, nbr=''):
     os.system(f"{BEAST_PATH} -beagle_cpu -overwrite {working_dir}.xml > beast_output.txt 2>&1")
     os.chdir(cwd)  # Resetting the working directory
 
+from apply_new_mapping import apply_new_mapping
+from nwk_parser import nwk_parser
+
 
 def run_treeannotator(n, l, r, nbr='', heights="ca"):
     # Runs the tree annotator on the given file producing the default MCC output
 
-    if heights not in ["mean", "median", "ca"]:
+    if heights not in ["mean", "median", "ca", "keep"]:
         raise ValueError(f"Unrecognized heights option for MCC tree! {heights}")
 
     working_dir = f"{n}_{l}_{str(r - int(r)).split('.')[1]}"
@@ -141,6 +144,16 @@ def run_treeannotator(n, l, r, nbr='', heights="ca"):
         while not os.path.exists(
                 f'{work_folder}/{working_dir}/MCC_{heights}.tree'):
             time.sleep(1)
+        if not os.path.exists(
+                f'{work_folder}/{working_dir}/conv_MCC_{heights}.tree'):
+            apply_new_mapping(
+                f'{work_folder}/{working_dir}/MCC_{heights}.tree',
+                f'{work_folder}/{working_dir}/{working_dir}.trees',
+                f'{work_folder}/{working_dir}/MCC_{heights}_remap.tree')
+            nwk_parser(
+                f'{work_folder}/{working_dir}/MCC_{heights}_remap.tree',
+                f'{work_folder}/{working_dir}/conv_MCC_{heights}.tree',
+                re_tree)
 
 
 def run_centroid(n, l, r, nbr):
@@ -148,6 +161,16 @@ def run_centroid(n, l, r, nbr):
     working_dir = f"{n}_{l}_{str(r - int(r)).split('.')[1]}"
     if nbr != '':
         working_dir += f'_{nbr}'
+
+    if not os.path.exists(f'{work_folder}/{working_dir}/conv_true_{working_dir}.tree'):
+        apply_new_mapping(
+            f'{work_folder}/{working_dir}/true_{working_dir}.tree',
+            f'{work_folder}/{working_dir}/{working_dir}.trees',
+            f'{work_folder}/{working_dir}/true_remap_{working_dir}.tree')
+        nwk_parser(
+            f'{work_folder}/{working_dir}/true_remap_{working_dir}.tree',
+            f'{work_folder}/{working_dir}/conv_true_{working_dir}.tree',
+            re_tree)
 
     try:
         myts = TimeTreeSet(f'{work_folder}/{working_dir}/{working_dir}.trees')
@@ -159,8 +182,14 @@ def run_centroid(n, l, r, nbr):
         file.write(f"Sum of squared RNNI distances of centroid: {sos}\n")
         file.close()
         cen.write_nexus(myts.map, file_name=f"{work_folder}/{working_dir}/centroid.tree", name=f"Cen_{working_dir}")
+        with open(f"{work_folder}/{working_dir}/tmp.tree", 'w+') as f:
+            f.write(cen.get_newick())
+        nwk_parser(f'{work_folder}/{working_dir}/tmp.tree',
+                   f'{work_folder}/{working_dir}/conv_centroid.tree')
+        os.remove(f'{work_folder}/{working_dir}/tmp.tree')  # Removing the tmp.tree
     except FileExistsError:
         pass
+
 
 def run_simulation(n, l, r, n_simulations=1):
 
@@ -191,5 +220,5 @@ def run_simulation(n, l, r, n_simulations=1):
 
 
 if __name__ == '__main__':
-    run_simulation(n=10, l=800, r=0.005, n_simulations=1)
+    run_simulation(n=10, l=800, r=0.005, n_simulations=5)
 
