@@ -41,8 +41,8 @@ Check out the example folder `/example/` if you want to run the centroid algorit
 
 # Reference
 
-If you use publish results using this software, please cite [this paper](https://doi.org/10.1101/2023.05.08.539790)
-- **Estimating the mean in the space of ranked phylogenetic trees**<br>
-   Lars Berling, Lena Collienne, and Alex Gavryushkin<br>
-  *bioRxiv* 2023<br>
-  [https://doi.org/10.1101/2023.05.08.539790](https://doi.org/10.1101/2023.05.08.539790) 
+If you publish a paper using this software, please cite<br>
+Lars Berling, Lena Collienne, and Alex Gavryushkin<br>
+**Estimating the mean in the space of ranked phylogenetic trees**<br>
+*bioRxiv* 2023<br>
+[https://doi.org/10.1101/2023.05.08.539790](https://doi.org/10.1101/2023.05.08.539790) 
