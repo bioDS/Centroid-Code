@@ -1,14 +1,24 @@
 __author__ = "Lars Berling"
 
-import rpy2.robjects as robjects
 from Bio import Phylo
 import re
 import json
+from rpy2.robjects.packages import importr, isinstalled
+from rpy2.robjects.vectors import StrVector
 
 """
 Defining Error Measures for the comparison of two trees
 See the 'Looking for trees in the forest paper'
 """
+
+
+def r_install_decorator(func):
+    packnames = ("ape", "phangorn")
+    names_to_install = [x for x in packnames if not isinstalled(name=x)]
+    if any(names_to_install):
+        utils = importr("utils")
+        utils.install_packages(StrVector(names_to_install))
+    return func
 
 
 def rank_error(tree_reference, tree):
@@ -98,6 +108,7 @@ def clade_credibility_score(tree, treeset):
     return score
 
 
+@r_install_decorator
 def log_likelihood(tree_file, alignment_file):
     """
     Computes the log likelihood of a given tree and alignment pair via the R package phangorn
@@ -106,17 +117,16 @@ def log_likelihood(tree_file, alignment_file):
     :param alignment_file: Path to alignment in fasta format
     :return: Log likelihood of the tree given the alignment, float
     """
-    likelihood = robjects.r(f'''
-        library(ape)
-        library(phangorn)
-    
-        alignment <- read.phyDat("{alignment_file}", format="fasta")
-        tree <- read.nexus("{tree_file}")
-        likelihood = pml(tree, alignment, rate = 0.005)$logLik
-    ''')
-    return likelihood[0]
 
+    ape = importr('ape')
+    phangorn = importr('phangorn')
 
+    alignment = phangorn.read_phyDat(alignment_file, format="fasta")
+    tree = ape.read_nexus(tree_file)
+    likelihood = phangorn.pml(tree, alignment, rate=0.005)
+    return likelihood.rx2("logLik")[0]
+
+@r_install_decorator
 def tree_distances(tree1, tree2):
     """
     Computes different distances between tree1 and tree2, returns a dict with keys name of distances and value distances
@@ -128,77 +138,25 @@ def tree_distances(tree1, tree2):
 
     out = {}
 
-    distances = robjects.r(f'''
-        library(ape)
-        library(phangorn)
-    
-        t1 <- read.nexus('{tree1}')
-        t2 <- read.nexus('{tree2}')
-        distances <- treedist(t1, t2)
-    ''')
+    ape = importr('ape')
+    phangorn = importr('phangorn')
+
+    t1 = ape.read_nexus(tree1)
+    t2 = ape.read_nexus(tree2)
+
+    distances = phangorn.treedist(t1, t2)
     out['RF'] = distances[0]  # symmetric difference -- RF distance
     out['KF'] = distances[1]  # branch score difference -- Kuhner Felsenstein
     out['PD'] = distances[2]  # path difference
     out['wPD'] = distances[3]  # quadratic path difference
 
-    wRF = robjects.r(f'''
-        library(ape)
-        library(phangorn)
-        
-        t1 <- read.nexus('{tree1}')
-        t2 <- read.nexus('{tree2}')
-        wRF.dist(t1, t2)
-    ''')
+    wRF = phangorn.wRF_dist(t1, t2)
     out['wRF'] = wRF[0]
 
-    nRF = robjects.r(f'''
-        library(ape)
-        library(phangorn)
-        
-        t1 <- read.nexus('{tree1}')
-        t2 <- read.nexus('{tree2}')
-        RF.dist(t1, t2, normalize=TRUE)
-    ''')
+    nRF = phangorn.RF_dist(t1, t2, normalize=True)
     out['nRF'] = nRF[0]
-    nwRF = robjects.r(f'''
-            library(ape)
-            library(phangorn)
 
-            t1 <- read.nexus('{tree1}')
-            t2 <- read.nexus('{tree2}')
-            wRF.dist(t1, t2, normalize=TRUE)
-        ''')
+    nwRF = phangorn.wRF_dist(t1, t2, normalize=True)
     out['nwRF'] = nwRF[0]
+
     return out
-
-
-def sos_trees_all(index, t_file, d_key='RF'):
-    if d_key == 'BHV':
-        sos = robjects.r(f'''
-                    library(ape)
-                    library(phangorn)
-                    library(distory)
-
-                    trees <- read.nexus('{t_file}')
-                    sos <- 0
-                    for (j in 1:length(trees)) {{
-                        sos <- sos + (dist.multiPhylo(c(trees[[{index}]], trees[[j]]))[1])^2
-                    }}
-                    sos      
-                ''')
-        return sos[0]
-
-    d = {'RF': 1, 'KF': 2, 'PD': 3, 'wPD': 4}
-
-    sos = robjects.r(f'''
-            library(ape)
-            library(phangorn)
-
-            trees <- read.nexus('{t_file}')
-            sos <- 0
-            for (j in 1:length(trees)) {{
-                sos <- sos + (treedist(trees[[{index}]], trees[[j]])[[{d[d_key]}]])^2
-            }}
-            sos      
-        ''')
-    return sos[0]
