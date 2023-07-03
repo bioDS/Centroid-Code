@@ -13,7 +13,7 @@ See the 'Looking for trees in the forest paper'
 
 
 def r_install_decorator(func):
-    packnames = ("ape", "phangorn")
+    packnames = ("ape", "phangorn", "phytools", "beautier")
     names_to_install = [x for x in packnames if not isinstalled(name=x)]
     if any(names_to_install):
         utils = importr("utils")
