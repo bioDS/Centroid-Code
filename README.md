@@ -14,7 +14,7 @@ After that install the python package to your Python environment using the `pip 
 
 ## Additional dependencies
 
-Some funcitons use R and the following packages need to be installed:
+Some functions use R and the following packages should be installed:
 `
 beautier,
 ape,
@@ -22,7 +22,8 @@ phangorn,
 phytools
 `
 
-BEAST needs to be installed to run the Simulations from `simulationGenerator.py`.
+BEAST2.6 (this is because of the R package beautier) needs to be installed to run the Simulations from `simulationGenerator.py`.
+You will also need to set the path to BEAST2 and to treeannotator in the script `simulationGenerator.py` line 25 and 27.
 
 For the error measure plot recreation the following python packages need to be installed
 `
