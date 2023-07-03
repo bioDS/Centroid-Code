@@ -5,10 +5,14 @@ import re
 import time
 
 from subprocess import Popen
-from rpy2 import robjects
 from tetres.summary.annotate_centroid import annotate_centroid
 from tetres.summary.centroid import Centroid
 from tetres.trees.time_trees import TimeTreeSet
+from rpy2.robjects.packages import importr
+from error_measures import r_install_decorator
+from apply_new_mapping import apply_new_mapping
+from nwk_parser import nwk_parser
+
 
 global re_tree
 re_tree = re.compile('\t?tree .*$', re.I)
@@ -22,25 +26,29 @@ global TREEANNOTATOR_PATH
 TREEANNOTATOR_PATH = "/home/lbe74/beast/bin/treeannotator"
 
 
+def beast_path_checker(func):
+    if not os.path.exists(BEAST_PATH):
+        raise ValueError("You need to set the BEAST_PATH varaiable to BEAST2.6 on your system! (l. 25 simulationGenerator.py)")
+    if not os.path.exists(TREEANNOTATOR_PATH):
+        raise ValueError("You need to set the TREEANNOTATOR_PATH varaiable to a treeannotator executable on your system! (l. 27 simulationGenerator.py)")
+    return func
+
+
+@r_install_decorator
 def sim_tree(n, working_dir):
     # Simulates tree via the sim.taxa function in R (only internally since we do not need this tree)
     # Convert that tree to a ranked tree (conv_true_*.tree)
     # This will be converted to a nexus tree (true_*.tree) which will be used for alignment simulation
 
-    robjects.r(f'''
-        library(maps)
-        library(ape)
-        library(phytools)
-        # library(e1071)
-        # tree <- rcoal({n}, tip.label = c(1:{n}), br = rdiscrete({n - 1}, probs = range(1:{n - 1})))
-        # tree <- rcoal({n}, tip.label = c(1:{n}), br = 'coalescent')
-        tree <- rcoal({n}, tip.label = c(1:{n}))
-        tree <- as.multiPhylo(tree)
-        names(tree) <- c('TrueTree')
-        write.nexus(tree, file ="{work_folder}/{working_dir}/true_{working_dir}.tree")
-    ''')
+    ape = importr('ape')
+    phytools = importr('phytools')
+
+    tree = phytools.as_multiPhylo(ape.rcoal(n, tip_label = [i for i in range(1, n+1)]))
+    tree.names = ("TrueTree")
+    ape.write_nexus(tree, file=f"{work_folder}/{working_dir}/true_{working_dir}.tree")
 
 
+@r_install_decorator
 def sim_alignment(n, l=800, r=0.005, nbr=''):
     # simulates a tree via the sim_tree function and then simulates an alignment along that tree via the simSeq funciton
     # from phangorn R package
@@ -59,14 +67,17 @@ def sim_alignment(n, l=800, r=0.005, nbr=''):
     sim_tree(n, working_dir)
 
     # Calling R phangorn to simulate a sequence along the true tree
-    robjects.r(f'''
-        library(phangorn)
-        tree <- read.nexus("{work_folder}/{working_dir}/true_{working_dir}.tree")  
-        s <- simSeq(tree, l = {l}, rate = {r})
-        write.phyDat(s, "{work_folder}/{working_dir}/{working_dir}.fas", format = "fasta")
-    ''')
+    ape = importr('ape')
+    phangorn = importr('phangorn')
+
+    tree = ape.read_nexus(f"{work_folder}/{working_dir}/true_{working_dir}.tree")
+    seq = phangorn.simSeq(tree, l=l, rate=r)
+    phangorn.write_phyDat(seq,
+                          f"{work_folder}/{working_dir}/{working_dir}.fas",
+                          format = "fasta")
 
 
+@r_install_decorator
 def generate_beast_xml(n, l, r, nbr=''):
     # Function will generate a BEAST2 xml input file using the R beautier library
     # Additionally changing the substitution rate with a python regex afterwards
@@ -75,20 +86,18 @@ def generate_beast_xml(n, l, r, nbr=''):
     if nbr != '':
         working_dir += f'_{nbr}'
 
-    robjects.r(f'''
-        library(beautier)
+    beautier = importr("beautier")
+    beautier.create_beast2_input_file(input_filename = f"{work_folder}/{working_dir}/{working_dir}.fas",
+                                      output_filename = f"{work_folder}/{working_dir}/{working_dir}.xml",
+                                      site_model=beautier.create_jc69_site_model(),
+                                      clock_model = beautier.create_strict_clock_model(),
+                                      tree_prior = beautier.create_ccp_tree_prior(),
+                                      mcmc = beautier.create_mcmc(chain_length = 2000000,
+                                                         store_every = 2000,
+                                                         pre_burnin = 500000,
+                                                         treelog = beautier.create_treelog(log_every = 2000)),
+                                      beauti_options = beautier.create_beauti_options(beast2_version = "2.6"))
 
-        create_beast2_input_file(input_filename = "{work_folder}/{working_dir}/{working_dir}.fas", 
-                         output_filename = "{work_folder}/{working_dir}/{working_dir}.xml",
-                         site_model = create_jc69_site_model(), 
-                         clock_model = create_strict_clock_model(), 
-                         tree_prior = create_ccp_tree_prior(), 
-                         mcmc = create_mcmc(chain_length = 2000000,
-                                            store_every = 2000,
-                                            pre_burnin = 500000,
-                                            treelog = create_treelog(log_every = 2000)),
-                         beauti_options = create_beauti_options(beast2_version = "2.6"))
-    ''')
     rate_regex = re.compile('(?P<Prefix>name="mutationRate">)(?P<rate>\d+\.\d+)(?P<Suffix></parameter>)')
     with open(f'{work_folder}/{working_dir}/{working_dir}.xml',
               'r+') as f:
@@ -99,6 +108,7 @@ def generate_beast_xml(n, l, r, nbr=''):
         f.truncate()
 
 
+@beast_path_checker
 def run_beast(n, l, r, nbr=''):
     # Will execute Beast on the xml file for the given simulation via the beastier R package
 
@@ -115,10 +125,8 @@ def run_beast(n, l, r, nbr=''):
     os.system(f"{BEAST_PATH} -beagle_cpu -overwrite {working_dir}.xml > beast_output.txt 2>&1")
     os.chdir(cwd)  # Resetting the working directory
 
-from apply_new_mapping import apply_new_mapping
-from nwk_parser import nwk_parser
 
-
+@beast_path_checker
 def run_treeannotator(n, l, r, nbr='', heights="ca"):
     # Runs the tree annotator on the given file producing the default MCC output
 
@@ -191,6 +199,8 @@ def run_centroid(n, l, r, nbr):
         pass
 
 
+@beast_path_checker
+@r_install_decorator
 def run_simulation(n, l, r, n_simulations=1):
 
     # creating the work_folder if not existing    
@@ -220,5 +230,5 @@ def run_simulation(n, l, r, n_simulations=1):
 
 
 if __name__ == '__main__':
-    run_simulation(n=10, l=800, r=0.005, n_simulations=5)
+    run_simulation(n=5, l=800, r=0.005, n_simulations=1)
 
