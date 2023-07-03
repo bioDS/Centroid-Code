@@ -1,18 +1,12 @@
 from simulationGenerator import work_folder, run_treeannotator
 import error_measures as em
-
 from tree import read_trees_from_file
-
-from tetres.summary.compute_sos import compute_sos_mt
 from tetres.trees.time_trees import TimeTreeSet
-
-from Bio import Phylo
-from scipy import stats
-import sys, re, os
+import os
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 import seaborn as sns
+
 
 def collapse(tree):
     # Takes a tree and returns list of list format without the leaf cluster
