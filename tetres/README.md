@@ -1,3 +1,8 @@
+| :information_source: New version available                             |
+|:---------------------------------------------------------|
+|Check out the more recent version of this package at [https://github.com/bioDS/tetres](https://github.com/bioDS/tetres)|
+
+
 tetres
 ===========
 
