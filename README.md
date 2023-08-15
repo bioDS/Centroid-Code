@@ -3,7 +3,12 @@
 This repository contains the Python implementation of the [Centroid algorithm](https://doi.org/10.1101/2023.05.08.539790) and a script to generate simulated datasets and recreate plots from the paper.
 The simulation part is separated, whereas the Centroid algorithm is part of the python package called `tetres` .
 
-The package has a documentation included as `html{pdf}`, see `tetres/docs/build/html{latex}/index.html{tetres.pdf}`. 
+| :information_source: New version available                             |
+|:---------------------------------------------------------|
+|Check out the more recent version of this package at [https://github.com/bioDS/tetres](https://github.com/bioDS/tetres)|
+
+
+The package has a documentation included as `html{pdf}`, see `tetres/docs/build/html{latex}/index.html{tetres.pdf}`.<br>
 The simulation script contains comments and the functions should be self-explanatory.
 
 
